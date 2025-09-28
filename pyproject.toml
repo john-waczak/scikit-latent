@@ -7,7 +7,9 @@ authors = [
     { name = "John Waczak", email = "john.louis.waczak@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "numpy>=2.3.3",
+]
 
 [project.scripts]
 scikit-latent = "sklatent:main"
@@ -29,6 +31,8 @@ dev = [
     "pre-commit>=4.3.0",
     "pre-commit-hooks>=6.0.0",
     "pydoclint>=0.7.3",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
     "ruff>=0.13.2",
 ]
 
@@ -190,8 +194,31 @@ fixable = [
 ]
 
 # A list of rule codes to ignore during linting
-ignore = []
+ignore = [
+    # Dynamically typed expressions (typing.Any) are disallowed
+    "ANN401",
+    # One-line docstring should fit on one line with quotes
+    "D200",
+    # One blank line required between summary line and description
+    "D205",
+    # Missing blank line after last section
+    "D413",
+]
 
+# Ignore linting rules for specific files
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    # Ignore type annotation requirements for tests
+    "ANN",
+    # Ignore missing docstrings in public module
+    "D100",
+    # Ignore missing docstrings in public function
+    "D103",
+    # Ignore use of assert statements in tests
+    "S101",
+    # Magic Values
+    "PLR2004"
+]
 
 # Ruff plugin-specific linting configurations
 
@@ -617,7 +644,7 @@ testpaths = ["tests"]
 
 ## Command-line options
 # Add the specified options to the set of command line arguments
-addopts = ["-m", "not slow"]
+addopts = ["-m", "not slow", "--cov=sklatent"]
 
 ## Custom Markers
 # Define custom markers for categorizing tests
