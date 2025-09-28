@@ -1,0 +1,105 @@
+repos:
+    - repo: local
+      hooks:
+          # Check merge conflicts
+          - id: check-merge-conflict
+            name: check-merge-conflict
+            entry: check-merge-conflict
+            language: system
+            types_or:
+                - bash
+                - ini
+                - json
+                - jupyter
+                - markdown
+                - mdx
+                - pyi
+                - python
+                - shell
+                - toml
+                - yaml
+          # Fix end of files
+          - id: end-of-file-fixer
+            name: end-of-file-fixer
+            entry: end-of-file-fixer
+            language: system
+            types_or:
+                - bash
+                - json
+                - jupyter
+                - markdown
+                - mdx
+                - pyi
+                - python
+                - shell
+                - toml
+                - yaml
+          # Format Markdown files
+          - id: mdformat
+            name: mdformat
+            entry: mdformat
+            language: system
+            types:
+                - markdown
+            args:
+                - --number
+                - --wrap=120
+                - --end-of-line=lf
+          # Remove trailing white space
+          - id: trailing-whitespace
+            name: trailing-whitespace
+            entry: trailing-whitespace-fixer --markdown-linebreak-ext=md
+            language: system
+            types_or:
+                - bash
+                - ini
+                - json
+                - jupyter
+                - markdown
+                - mdx
+                - pyi
+                - python
+                - shell
+                - toml
+                - yaml
+          # Apply all Ruff linting rules to Python code
+          - id: ruff-check
+            name: ruff-check
+            entry: ruff check
+            language: system
+            types_or:
+                - jupyter
+                - pyi
+                - python
+            args:
+                - --config=pyproject.toml
+          # Apply all Ruff formatting rules to Python code
+          - id: ruff-format
+            name: ruff-format
+            entry: ruff format
+            language: system
+            types_or:
+                - jupyter
+                - pyi
+                - python
+            args:
+                - --config=pyproject.toml
+          # Check type hints
+          - id: mypy
+            name: mypy
+            entry: mypy
+            language: system
+            types:
+                - python
+            args:
+                - --config=pyproject.toml
+          # Check docstrings
+          - id: pydoclint
+            name: pydoclint
+            entry: pydoclint
+            language: system
+            types:
+                - python
+            args:
+                - --config=pyproject.toml
+                - --exclude=tests/*

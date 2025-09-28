@@ -1,0 +1,678 @@
+[project]
+name = "scikit-latent"
+version = "0.1.0"
+description = "Scikit-learn compatible latent space models for dimensionality reduction, representation learning, and decomposition."
+readme = "README.md"
+authors = [
+    { name = "John Waczak", email = "john.louis.waczak@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+scikit-latent = "sklatent:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+source = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "src/sklatent",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "pre-commit-hooks>=6.0.0",
+    "pydoclint>=0.7.3",
+    "ruff>=0.13.2",
+]
+
+
+# Global Ruff settings
+[tool.ruff]
+# Patterns to exclude from linting and formatting
+extend-exclude = []
+
+# Additional patterns to include for linting and formatting
+extend-include = [
+    "*.ipynb"
+]
+
+# Enables automatic fixing of linting issues (when possible)
+fix = true
+
+# Sets the number of spaces used for indentation
+indent-width = 4
+
+# Sets the maximum line length for code formatting
+line-length = 79
+
+# Use new/unstable rules when enabled
+preview = true
+
+# Displays the fixes applied by the tool
+show-fixes = true
+
+# The directory to consider when resolving first- vs. third-party imports
+src = ["sklatent", "tests"]
+
+# How do display errors.
+# Options: full, concise, grouped, json, junit, github, gitlab, pylint, azure
+output-format = "full"
+
+# Formatting Configuration
+[tool.ruff.format]
+# Whether to format code snippets in docstrings
+docstring-code-format = true
+
+# Determines the line length for code within docstrings
+# Options: "dynamic" or specific number (e.g., 75)
+docstring-code-line-length = "dynamic"
+
+# Sets the style for indentation (spaces or tabs)
+indent-style = "space"
+
+# Chooses the line-ending style, 'auto' adapts based on operating system
+line-ending = "auto"
+
+# Sets the style for quotation marks in strings
+quote-style = "double"
+
+# Ruff uses existing trailing commas as an indication that short lines
+# should be left separate
+skip-magic-trailing-comma = false
+
+
+## Linting Configuration
+[tool.ruff.lint]
+# Select specific linting rules to apply, identified by their codes
+extend-select = [
+    # Remove commented out code
+    "ERA",
+    # FastAPI rules
+    "FAST",
+    # Type-annotation rules
+    "ANN",
+    # Async rules
+    "ASYNC",
+    # Security Rules
+    "S",
+    # Blind Exceptions Rules
+    "BLE",
+    # Boolean trap Rules
+    "FBT",
+    # Bugbear - find likely bugs
+    "B",
+    # Rules for shadowing python built-ins
+    "A",
+    # Trailing comma rules
+    "COM",
+    # Write better comprehensions
+    "C4",
+    # Datetime rules
+    "DTZ",
+    # Error Message Rules
+    "EM",
+    # Executable file rules
+    "EXE",
+    # Implicit string concatenation rules
+    "ISC",
+    # Import convention rules
+    "ICN",
+    # Logging rules
+    "LOG",
+    # Logging formatting rules
+    "G",
+    # Ban implicit namespace packages
+    "INP",
+    # Flake-8 pie rules
+    "PIE",
+    # Pytest style rules
+    "PT",
+    # Quote rules
+    "Q",
+    # Raise rules
+    "RSE",
+    # Return rules
+    "RET",
+    # Self rules
+    "SLF",
+    # Help simplify your code
+    "SIM",
+    # Tidier imports
+    "TID",
+    # Handle type-checking-only imports
+    "TC",
+    # Rules for function arguments
+    "ARG",
+    # Use pathlib
+    "PTH",
+    # Prefer fstrings
+    "FLY",
+    # Isort rules
+    "I",
+    # Numpy rules
+    "NPY",
+    # Pandas rules
+    "PD",
+    # Naming rules
+    "N",
+    # Performance anti-patterns
+    "PERF",
+    # Pycodestyle Error rules
+    "E",
+    # Pycodestyle Warning rules
+    "W",
+    # Pydoclint rules
+    "DOC",
+    # Pydocstyle rules
+    "D",
+    # Pyflakes rules
+    "F",
+    # Pylint rules
+    "PL",
+    # Refurb rules
+    "FURB",
+    # Ruff-specific rules
+    "RUF",
+    # Exception handling anti-patterns
+    "TRY",
+]
+
+# Defines which rules can be automatically fixed
+fixable = [
+    "ALL"  # Allows all fixable issues to be automatically corrected
+]
+
+# A list of rule codes to ignore during linting
+ignore = []
+
+
+# Ruff plugin-specific linting configurations
+
+# Settings specific to pytest-style checks in flake8
+[tool.ruff.lint.flake8-pytest-style]
+# Specifies whether parentheses should be used in fixture declarations
+fixture-parentheses = true
+
+# Specifies whether parentheses should be used in marker declarations
+mark-parentheses = true
+
+# Sets the type for parameter names in parametrize decorations
+# Options: "tuple", "list"
+parametrize-names-type = "tuple"
+
+# Sets the row type for parametrize values
+# Options: "tuple", "list"
+parametrize-values-row-type = "tuple"
+
+# Sets the overall type for parametrize values
+# Options: "tuple", "list"
+parametrize-values-type = "tuple"
+
+# Configuration for flake8 quotes plugin under ruff
+[tool.ruff.lint.flake8-quotes]
+# Sets the type of quotes for docstrings
+# Options: "single", "double"
+docstring-quotes = "double"
+
+# Sets the type of quotes for inline expressions
+# Options: "single", "double"
+inline-quotes = "double"
+
+# Sets the type of quotes for multiline strings
+# Options: "single", "double"
+multiline-quotes = "double"
+
+# Configuration for isort, a Python import sorter, under ruff
+[tool.ruff.lint.isort]
+# Sorts imports case-sensitively, meaning that capitalized letters come
+# before lowercase
+case-sensitive = true
+
+# Allows combining 'as' imports into a single line; helps to keep the
+# import section neat and tidy
+combine-as-imports = true
+
+# Forces each import to be on a single line; useful for keeping a clear
+# list of imports
+force-single-line = false
+
+# Ensures all imports within a section are sorted together; useful for
+# large projects with many imports
+force-sort-within-sections = false
+
+# When combining long from imports, forces wrapping of aliases into
+# multiple lines, aiding in readability
+force-wrap-aliases = true
+
+# Determines whether to place 'from' imports before 'import' statements
+from-first = false
+
+# Disables isort's default behavior to place imports in sections
+no-sections = false
+
+# Configures the order for relative imports, placing more distant imports
+# before closer ones
+# Options: "furthest-to-closest", "closest-to-furthest"
+relative-imports-order = "furthest-to-closest"
+
+# Dictates the order of imports
+section-order = [
+    "future",            # Future library imports, e.g., from __future__
+    "standard-library",  # Standard library imports (like os, sys)
+    "third-party",       # Imports from third-party libraries (e.g., numpy)
+    "first-party",       # Imports from modules of the same project
+    "local-folder"       # Imports intended for local folder modules
+]
+
+# Allows trailing commas when splitting imports into multiple lines, which
+# is especially useful for version control systems
+split-on-trailing-comma = true
+
+# Additional Plugin-Specific Linting Configuration
+
+# pycodestyle settings for ruff
+[tool.ruff.lint.pycodestyle]
+# Sets the maximum length for docstrings
+max-doc-length = 79
+
+# Sets the maximum line length for code
+max-line-length = 79
+
+# pydocstyle settings for ruff
+[tool.ruff.lint.pydocstyle]
+# Specifies the docstring convention to use
+# Options: "numpy", "google", "pep257"
+convention = "numpy"
+
+# pylint settings for Ruff
+[tool.ruff.lint.pylint]
+# List of dunder methods name to allow, in addition to the default set
+allow-dunder-method-names = []
+
+# List of types that are considered to be magic values.
+allow-magic-value-types = []
+
+# Maximum number of arguments for a function or method.
+max-args = 10
+
+# Maximum number of boolean expressions in a single condition.
+max-bool-expr = 5
+
+# Maximum number of branches in a function or method.
+max-branches = 20
+
+# Maximum number of local variables in a function or method.
+max-locals = 20
+
+# Maximum number of nested blocks in a function or method.
+max-nested-blocks = 10
+
+# Maximum number of positional arguments for a function or method.
+max-positional-args = 10
+
+# Maximum number of public methods in a class.
+max-public-methods = 30
+
+# Maximum number of return statements in a function or method.
+max-returns = 10
+
+# Maximum number of statements in a function or method.
+max-statements = 75
+
+
+# Mypy configuration
+
+[tool.mypy]
+## Global options
+
+# Specifies the glob pattern for files to include in type checks
+files = ["**/*.py"]
+
+# Specifies patterns to exclude from type checking
+# Example: venv to exclude virtual environment folder
+exclude = '''(?x)(
+    # Match any directory containing standard venv markers
+    ^[^/\\]+/pyvenv\.cfg|          # Standard venv config file (Unix)
+    ^[^/\\]+\\pyvenv\.cfg|         # Standard venv config file (Windows)
+
+    # Match Python interpreter patterns
+    ^[^/\\]+/bin/python|           # Unix Python interpreter
+    ^[^/\\]+/bin/python[0-9.]+|    # Unix Python interpreter with version
+    ^[^/\\]+\\Scripts\\python\.exe|# Windows Python interpreter
+
+    # Match site-packages patterns
+    ^[^/\\]+/lib/python[0-9.]+/site-packages/|  # Unix site-packages
+    ^[^/\\]+\\Lib\\site-packages\\|             # Windows site-packages
+
+    # Match common venv folder naming patterns just to be safe
+    ^\.?venv[0-9._-]*[/\\]|        # venv, .venv, venv-name, etc.
+    ^\.?env[0-9._-]*[/\\]|         # env, .env, env-name, etc.
+    ^virtualenv[0-9._-]*[/\\]|     # virtualenv, virtualenv-name, etc.
+    ^python[0-9._-]*env[/\\]|      # pythonenv, python3env, etc.
+    ^py[0-9._-]*env[/\\]|          # pyenv, py3env, etc.
+    )'''
+
+# Ignores errors about missing imports when mypy cannot find library stubs
+ignore_missing_imports = true
+
+## Import discovery
+
+# Specifies the paths to use, after trying the paths from MYPYPATH
+mypy_path = []
+
+# Enables PEP 420 style namespace packages
+namespace_packages = true
+
+# Tells mypy that top-level packages will be based in either the current directory, or a member of the MYPYPATH
+# environment variable or mypy_path config option (only useful in the absence of __init__.py)
+explicit_package_bases = false
+
+# Directs what to do with imports when the imported module is found as a .py file and not part of the files, modules,
+# and packages provided
+# Options: normal, silent, error, skip
+follow_imports = "normal"
+
+# Determines whether to respect the follow_imports setting for stub files
+follow_imports_for_stubs = false
+
+# Disables using type information in installed packages (see PEP 561)
+no_site_packages = false
+
+# Enables reporting error messages generated within installed packages
+no_silence_site_packages = false
+
+## Untyped definitions and calls
+
+# Disallows calling functions without type annotations from functions with
+# type annotations
+disallow_untyped_calls = false
+
+# Disallows defining functions without type annotations or with incomplete type annotations (a superset of
+# disallow_incomplete_defs)
+disallow_untyped_defs = false
+
+# Disallows defining functions with incomplete type annotations, while still allowing entirely unannotated definitions
+disallow_incomplete_defs = false
+
+# Type-checks the interior of functions without type annotations
+check_untyped_defs = false
+
+# Reports an error whenever a function with type annotations is decorated with a decorator without annotations
+disallow_untyped_decorators = false
+
+## None and Optional handling
+
+# Causes mypy to treat arguments with a None default value as having an implicit Optional type
+implicit_optional = false
+
+# Effectively disables checking of Optional types and None values
+# Nb. strict_optional = false is evil
+strict_optional = true
+
+## Configuration warnings
+
+# Warns about casting an expression to its inferred type
+warn_redundant_casts = false
+
+# Warns about unneeded # type: ignore comments
+warn_unused_ignores = false
+
+# Shows errors for missing return statements on some execution paths
+warn_no_return = true
+
+# Shows a warning when returning a value with type Any from a function declared with a non-Any return type
+warn_return_any = false
+
+# Shows a warning when encountering any code inferred to be unreachable or redundant after performing type analysis
+warn_unreachable = false
+
+## Suppressing errors
+
+# Ignores all non-fatal errors
+ignore_errors = false
+
+## Miscellaneous strictness flags
+
+# Causes mypy to suppress errors caused by not being able to fully infer the types of global and class variables
+allow_untyped_globals = false
+
+# Allows variables to be redefined with an arbitrary type, as long as the redefinition is in the same block and nesting
+# level as the original
+allow_redefinition = false
+
+# Disallows inferring variable type for None from two assignments in different scopes
+local_partial_types = false
+
+# By default, imported values to a module are treated as exported and mypy allows other modules to import them. When
+# false, mypy will not re-export unless the item is imported using from-as or is included in __all__
+implicit_reexport = true
+
+# Make arguments prepended via Concatenate be truly positional-only
+strict_concatenate = false
+
+# Prohibit equality checks, identity checks, and container checks between non-overlapping types
+strict_equality = false
+
+# Enable all optional error checking flags
+strict = false
+
+## Configuring error messages
+
+# Prefixes each error with the relevant context
+show_error_context = false
+
+# Shows column numbers in error messages
+show_column_numbers = false
+
+# Shows documentation link to corresponding error code
+show_error_code_links = false
+
+# Hides error codes in error messages
+hide_error_codes = false
+
+# Use visually nicer output in error messages: use soft word wrap, show source code snippets, and show error location
+# markers
+pretty = false
+
+# Shows error messages with color enabled
+color_output = true
+
+# Shows a short summary line after error messages
+error_summary = true
+
+# Show absolute paths to files
+show_absolute_path = false
+
+# Always use List instead of list in error messages, even on Python 3.9+
+force_uppercase_builtins = false
+
+# Always use Union[] and Optional[] for union types in error messages (instead of the | operator), even on Python 3.10+
+force_union_syntax = false
+
+## Incremental mode
+
+# Enables incremental mode
+incremental = true
+
+# Use an SQLite database to store the cache
+sqlite_cache = false
+
+# Include fine-grained dependency information in the cache for mypy
+cache_fine_grained = false
+
+# Makes mypy use incremental cache data even if it was generated by a different version of mypy
+skip_version_check = false
+
+# Skip cache internal consistency checks based on mtime
+skip_cache_mtime_checks = false
+
+## Advanced options
+
+# A comma-separated list of mypy plugins
+plugins = ["pydantic.mypy"]
+
+# Invokes pdb on fatal error
+pdb = false
+
+# Shows traceback on fatal error
+show_traceback = false
+
+# Raise exception on fatal error
+raise_exceptions = false
+
+# Warns about missing type annotations in typeshed
+warn_incomplete_stub = false
+
+## Miscellaneous
+
+# Makes script x become module x instead of __main__
+scripts_are_modules = false
+
+# Warns about per-module sections in the config file that do not match any files processed when invoking mypy
+warn_unused_configs = false
+
+# Controls how much debug output will be generated
+verbosity = 0
+
+
+
+# Pydoclint configuration
+# https://jsh9.github.io/pydoclint/config_options.html
+[tool.pydoclint]
+# The style of docstring to enforce
+style = "numpy"
+
+# Whether to include argument type hints in function signatures
+arg-type-hints-in-signature = true
+
+# Whether to enforce type hints in docstrings for function arguments
+arg-type-hints-in-docstring = true
+
+# Whether to check the order of arguments in docstrings against the
+# function signature
+check-arg-order = true
+
+# Whether to skip checking short docstrings
+skip-checking-short-docstrings = false
+
+# Whether to skip checking for the presence of a "Raises" section
+skip-checking-raises = false
+
+# Whether to allow __init__ methods to have a docstring that only documents
+# the class
+allow-init-docstring = true
+
+# Whether to require a "Returns" section even when a function returns
+# nothing
+require-return-section-when-returning-nothing = false
+
+# Whether to check that the return type in docstrings matches the
+# function's return type
+check-return-types = true
+
+# Whether to require a "Yields" section even when a generator yields
+# nothing
+require-yield-section-when-yielding-nothing = true
+
+# Whether to check that the yield type in docstrings matches the
+# generator's yield type
+check-yield-types = true
+
+# Whether to ignore arguments that start with an underscore
+ignore-underscore-args = true
+
+# Whether to check for class attribute documentation
+check-class-attributes = true
+
+# Whether to require documentation for private class attributes
+should-document-private-class-attributes = false
+
+# Whether to treat property methods as class attributes for documentation
+# purposes
+treat-property-methods-as-class-attributes = false
+
+# Whether to show filenames in every violation message
+show-filenames-in-every-violation-message = false
+
+
+# PyTest configuration
+# https://docs.pytest.org/en/stable/reference/reference.html#ini-options-ref
+[tool.pytest.ini_options]
+
+# Exclude tests from being collected based on Unix shell-style wildcards
+norecursedirs = ["venv", ".venv", ".ipynb_checkpoints"]
+
+# Add directories to sys.path for module resolution
+pythonpath = ["edsai_tools"]
+
+# Directories where pytest will look for tests
+testpaths = ["tests"]
+
+## Command-line options
+# Add the specified options to the set of command line arguments
+addopts = ["-m", "not slow"]
+
+## Custom Markers
+# Define custom markers for categorizing tests
+markers = [
+    "mock: marks tests that use mocking with pytest-mock",
+    "slow: marks tests that are slow to run",
+    "integration: marks integration tests",
+    "regression: marks tests that are part of the regression test suite",
+    "smoke: marks basic smoke tests to ensure critical functionality",
+]
+
+## Directory and path settings
+# Directory where the cache plugin stores its data
+cache_dir = ".pytest_cache"
+
+# Controls the console output style
+# Options: classic, progress, count
+console_output_style = "progress"
+
+## Test logging and reporting
+# Default encoding to use to decode text files with docstrings
+doctest_encoding = "utf-8"
+
+# Action for empty parameter sets in parameterization
+# Options: skip, xfail, fail_at_collect
+empty_parameter_set_mark = "skip"
+
+# Filters and actions for matched warnings
+filterwarnings = []
+
+# Sets the logging level
+# Options: CRITICAL, ERROR, WARNING, INFO, DEBUG, NOTSET
+log_level = "NOTSET"
+
+# Sets the format for log messages
+log_format = "%(filename)s:%(lineno)d %(levelname)s %(message)s"
+
+## JUnit XML reporting
+# Configures how durations are recorded in the JUnit XML report
+# Options: total, call
+junit_duration_report = "total"
+
+# Configures the format of the generated JUnit XML file
+# Options: xunit1, xunit2
+junit_family = "xunit1"
+
+# Path to the JUnit XML file
+junit_logging = false
+
+## Test collection and selection
+# Patterns to use for matching test files
+python_files = ["test_*.py", "*_test.py"]
+
+# Patterns to use for matching test classes
+python_classes = ["Test*"]
+
+# Patterns to use for matching test functions
+python_functions = ["test_*"]
