@@ -1,0 +1,51 @@
+site_name: scikit-latent
+site_author: John Waczak
+copyright: Copyright &copy; 2025 John Waczak
+nav:
+  - Home: index.md
+  - About: about.md
+  - Reference: reference.md
+theme:
+  name: material
+  font:
+    text: Lato
+  palette:
+  # Palette toggle for automatic mode
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/brightness-auto
+      name: Switch to light mode
+
+  # Palette toggle for light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: blue grey
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+
+  # Palette toggle for dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: black
+    toggle:
+      icon: material/brightness-4
+      name: Switch to system preference
+
+repo_url: https://github.com/john-waczak/scikit-latent
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true # Use generic output for MathJax 3
+extra_javascript:
+  - javascripts/mathjax.js # MathJax configs
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_signature_annotations: true
+            docstring_style: numpy
+            show_source: false

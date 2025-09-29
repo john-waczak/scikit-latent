@@ -28,11 +28,19 @@ packages = [
 
 [dependency-groups]
 dev = [
+    "docstring-parser>=0.17.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.20",
+    "mkdocstrings[python]>=0.30.1",
     "pre-commit>=4.3.0",
     "pre-commit-hooks>=6.0.0",
     "pydoclint>=0.7.3",
+    "pymdown-extensions>=10.16.1",
     "pytest>=8.4.2",
     "pytest-cov>=7.0.0",
+    "python-lsp-server>=1.13.1",
+    "pytkdocs[numpy-style]>=0.16.5",
+    "quartodoc>=0.11.1",
     "ruff>=0.13.2",
 ]
 
@@ -197,6 +205,8 @@ fixable = [
 ignore = [
     # Dynamically typed expressions (typing.Any) are disallowed
     "ANN401",
+    # Missing docstring in public module
+    "D100",
     # One-line docstring should fit on one line with quotes
     "D200",
     # One blank line required between summary line and description

@@ -1,7 +1,5 @@
-from sklatent import (
-    add as sk_add,
-    main,
-)
+from sklatent import main
+from sklatent.test_funcs import add as sk_add
 
 
 def test_main():
