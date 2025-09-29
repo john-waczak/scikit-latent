@@ -1,9 +1,9 @@
 window.MathJax = {
   tex: {
-    inlineMath: [['\\(', '\\)']],
-    displayMath: [['\\[', '\\]']],
+    //inlineMath: [['\(', '\)']],
+    //displayMath: [['\[', '\]']],
     processEscapes: true,
-    processEnvironments: true, // Crucial for environments like align, equation
+    processEnvironments: true, 
     tags: 'ams' // Enables AMS equation numbering
   },
   options: {
