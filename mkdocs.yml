@@ -4,7 +4,7 @@ copyright: Copyright &copy; 2025 John Waczak
 nav:
   - Home: index.md
   - About: about.md
-  - Reference: reference.md
+  - Code Reference: reference/
 theme:
   name: material
   font:
@@ -37,11 +37,16 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true # Use generic output for MathJax 3
 extra_javascript:
+  - javascripts/mathjax.js # MathJax configs
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - javascripts/mathjax.js # MathJax configs
 plugins:
   - search
+  - gen-files:
+      scripts:
+        - scripts/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
   - mkdocstrings:
       handlers:
         python:

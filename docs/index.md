@@ -5,4 +5,8 @@ of latent space models for dimensionality reduction, representation learning, an
 
 Test equation:
 
-\\begin{align} \\int_0^1 f(x) ,\\mathrm{d}x \\end{align}
+$$
+\begin{equation}
+  \int\_{0}^{\\infty} e^{-x^2}  \, \mathrm{d}x = \frac{\sqrt{\pi}}{2}
+\end{equation}
+$$
